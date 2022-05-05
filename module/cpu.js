@@ -22,13 +22,27 @@ exports.FanON = () => {
 }
 exports.SetFan = (num) => {
     num = parseInt(((Max - Min) / 100 * num + Min - 100))
-    console.log(num)
     rpio.pwmSetData(pwm_pin, num); // 设置 data/1204 占空比的PWM波
 }
 exports.autoFan = () => {
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
-        console.log(this.getCpuTem())
+      if(this.getCpuTem()<40) {
+        this.FanOff(10)
+        return
+      }
+      if(this.getCpuTem()<50) {
+        this.SetFan(40)
+        return
+      }
+      if(this.getCpuTem()<50) {
+        this.SetFan(50)
+        return
+      }
+      if(this.getCpuTem()<60) {
+        this.SetFan(70)
+        return
+      }
     }, 2000);
-   // rpio.pwmSetData(pwm_pin, num); // 设置 data/1204 占空比的PWM波
+   //  // 设置 data/1204 占空比的PWM波
 }
