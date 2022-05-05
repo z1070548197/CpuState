@@ -11,6 +11,7 @@ rpio.msleep(6); // 延时6毫秒
 const TEMP_FILE = '/sys/class/thermal/thermal_zone0/temp'
 exports.getCpuTem = () => {
     let tem = parseInt(fs.readFileSync(TEMP_FILE)) / 1000
+    console.log(tem)
     return tem;
 }
 exports.FanOff = () => {
