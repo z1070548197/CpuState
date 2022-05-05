@@ -23,4 +23,9 @@ router.get('/SetFan', async (ctx, next) => {
   ctx.body= cpu.SetFan(num)
   ctx.status=200
 })
+router.get('/SetAutoFan', async (ctx, next) => {
+
+ctx.body= cpu.autoFan()
+ctx.status=200
+})
 module.exports = router
