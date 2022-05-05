@@ -10,10 +10,17 @@ router.get('/getCpuTem', async (ctx, next) => {
   ctx.status=200
 })
 
-router.get('/json', async (ctx, next) => {
-  ctx.body = {
-    title: 'koa2 json'
-  }
+router.get('/FanOff', async (ctx, next) => {
+  ctx.body= cpu.FanOff()
+  ctx.status=200
 })
-
+router.get('/FanOn', async (ctx, next) => {
+  ctx.body= cpu.FanON()
+  ctx.status=200
+})
+router.get('/SetFan', async (ctx, next) => {
+    let num=ctx.query.num
+  ctx.body= cpu.SetFan(num)
+  ctx.status=200
+})
 module.exports = router
