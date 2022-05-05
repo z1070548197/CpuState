@@ -26,7 +26,7 @@ exports.SetFan = (num) => {
     rpio.pwmSetData(pwm_pin, num); // 设置 data/1204 占空比的PWM波
 }
 exports.autoFan = () => {
-clearInterval(autoInterval)
+    clearInterval(autoInterval)
     autoInterval = setInterval(() => {
         console.log(this.getCpuTem())
     }, 2000);
