@@ -34,7 +34,7 @@ router.get('/SetAutoFan', async (ctx, next) => {
 router.get('/FanInfo', async (ctx, next) => {
   let infos = (await Cpu.find())[0]
 
-  ctx.body = { ...cpu.FanInfo(), infos }
+  ctx.body = { ...cpu.FanInfo(), ...infos }
   ctx.status = 200
 })
 module.exports = router
