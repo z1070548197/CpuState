@@ -1,3 +1,4 @@
+
 const rpio = require('rpio') //进入GPIO node库 
 const fs = require('fs')
 const CON = require('../utils/config')
@@ -14,7 +15,7 @@ rpio.pwmSetClockDivider(8); // 时钟8分频 具体是多少 可能示波器显�
 rpio.pwmSetRange(pwm_pin, Max); // 设置PWM发生器范围
 // rpio.msleep(6); // 延时6毫秒
 const TEMP_FILE = CON.TEMP_FILE //cpu温度路径
-let FanAutoState = (await Cpu.find())[0].FanAutoState //自动风扇状态
+let FanAutoState = null//自动风扇状态
 
 exports.FanInfo = () => {
     const info = {
@@ -77,4 +78,8 @@ exports.autoFan = (e) => {
         }
     }, 2000);
 }
-this.autoFan()
+let info=async()=>{
+    FanAutoState =(await Cpu.find())[0].FanAutoState 
+    this.autoFan()
+}
+info()
