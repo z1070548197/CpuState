@@ -16,8 +16,8 @@
  // 路径为证书放置的位置
   
  const options = {
-   key: fs.readFileSync('./key/home.zanzcc.com.key'),
-   cert: fs.readFileSync('./key/home.zanzcc.com.pem'),
+   key: fs.readFileSync('../key/home.zanzcc.com.key'),
+   cert: fs.readFileSync('../key/home.zanzcc.com.pem'),
   }
   app.use(sslify())
  
