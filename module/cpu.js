@@ -57,6 +57,7 @@ exports.autoFan = (e) => {
     FanAutoState = e;
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
+        console.log(FanAutoState)
         if (FanAutoState === 'false' ||FanAutoState === false) { 
             console.log('打开手动')
             switchFan()
