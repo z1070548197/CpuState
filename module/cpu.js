@@ -45,11 +45,16 @@ exports.SetFan = (num) => {
     num = parseInt(((Max - Min) / 100 * num + Min - 100))
     rpio.pwmSetData(pwm_pin, num);
 }
+let switchFan=(e)=>{
+
+}
 exports.autoFan = (e) => {
     FanAutoState = e;
+    console.log(e,typeof e)
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
         if (FanAutoState === false) { 
+
             clearInterval(autoInterval)//自动模式被关闭自动清理定时器
             return
         }
