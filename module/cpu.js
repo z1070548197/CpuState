@@ -78,8 +78,8 @@ exports.autoFan = (e) => {
         }
     }, 2000);
 }
-let info=async()=>{
+let initialization=async()=>{
     FanAutoState =(await Cpu.find())[0].FanAutoState 
     this.autoFan()
 }
-info()
+initialization()
