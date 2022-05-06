@@ -24,6 +24,7 @@ Stateinfo()
 exports.FanInfo =async () => {
    let infos= await Cpu.find()
      PublicNum=infos[0].fanNum
+     console.log(infos[0].fanNum)
     const info={
         CON,PublicNum,FanAutoState
     }
