@@ -28,7 +28,7 @@ ctx.body= cpu.autoFan(ctx.query.state)
 ctx.status=200
 })
 router.get('/FanInfo', async (ctx, next) => {
-  ctx.body= cpu.FanInfo
+  ctx.body= cpu.FanInfo()
   ctx.status=200
   })
 module.exports = router
