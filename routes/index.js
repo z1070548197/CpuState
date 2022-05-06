@@ -19,7 +19,7 @@ router.get('/FanOn', async (ctx, next) => {
   ctx.status = 200
 })
 router.get('/switchFan', async (ctx, next) => {
-  if(ctx.query.state==true){
+  if(ctx.query.state=='true'){
     ctx.body = cpu.FanON()
     console.log('123')
   }else{
