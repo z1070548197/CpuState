@@ -57,7 +57,7 @@ exports.autoFan = (e) => {
     FanAutoState = e;
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
-        if (FanAutoState === 'false' ||FanAutoState == false) { 
+        if (FanAutoState === 'false' ||FanAutoState === false) { 
             console.log('打开手动')
             switchFan()
             clearInterval(autoInterval)//自动模式被关闭自动清理定时器
