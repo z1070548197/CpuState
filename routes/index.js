@@ -1,6 +1,12 @@
 const router = require('koa-router')()
 const Cpu = require('../models/Cpu'); //引入
 const cpu = require('../module/cpu')
+let Stateinfo = async () => {
+  if ((await Cpu.find()).length === 0) {
+      new Cpu().save()
+  }
+}
+Stateinfo()
 router.get('/', async (ctx, next) => {
 
 })

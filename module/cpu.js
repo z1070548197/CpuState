@@ -15,12 +15,7 @@ rpio.pwmSetRange(pwm_pin, Max); // 设置PWM发生器范围
 // rpio.msleep(6); // 延时6毫秒
 const TEMP_FILE = CON.TEMP_FILE //cpu温度路径
 let FanAutoState = false  //自动风扇状态
-let Stateinfo = async () => {
-    if ((await Cpu.find()).length === 0) {
-        new Cpu().save()
-    }
-}
-Stateinfo()
+
 exports.FanInfo = () => {
     const info = {
         CON, FanAutoState
@@ -38,7 +33,7 @@ exports.FanOff = () => {
 exports.FanON = () => {
     this.SetFan(100)
 }
-let switchFan = async (e) => {
+exports.switchFan = async (e) => {
     FanAutoState = false
     if (e) {
         this.FanON()
@@ -56,10 +51,9 @@ exports.autoFan = (e) => {
     FanAutoState = e;
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
-        console.log(FanAutoState)
         if (FanAutoState === 'false' || FanAutoState == false) {
             console.log('打开手动')
-            switchFan()
+            this.switchFan()
             clearInterval(autoInterval)//自动模式被关闭自动清理定时器
             return
         }
