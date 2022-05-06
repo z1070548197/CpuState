@@ -35,7 +35,7 @@ exports.FanON = () => {
 }
 exports.switchFan = async (e) => {
     FanAutoState = false
-  console.log(e)
+  e==undefined ? e=(await Cpu.find)[0].FanState : ''
     if (e) {
         this.FanON()
     } else {
