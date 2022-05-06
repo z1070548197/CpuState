@@ -23,9 +23,7 @@ let Stateinfo=async ()=>{
 Stateinfo()
 exports.FanInfo =async () => {
    let infos= await Cpu.find()
-    if( infos.length!==0){
-        PublicNum=PublicNum[0].fanNum
-    }
+     PublicNum=infos[0].fanNum
     const info={
         CON,PublicNum,FanAutoState
     }
