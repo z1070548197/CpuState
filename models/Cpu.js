@@ -11,7 +11,7 @@ const UserSchema = new Schema({
     type:Object
   },
   FanAutoState:{
-    type:Boolean
+    type:String
   }
 });
  
