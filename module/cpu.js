@@ -35,6 +35,7 @@ exports.FanON = () => {
 }
 exports.switchFan = async (e) => {
     FanAutoState = false
+  console.log(e)
     if (e) {
         this.FanON()
     } else {
