@@ -14,7 +14,7 @@ rpio.pwmSetClockDivider(8); // 时钟8分频 具体是多少 可能示波器显�
 rpio.pwmSetRange(pwm_pin, Max); // 设置PWM发生器范围
 // rpio.msleep(6); // 延时6毫秒
 const TEMP_FILE = CON.TEMP_FILE //cpu温度路径
-let FanAutoState = false  //自动风扇状态
+let FanAutoState = (await Cpu.find())[0].FanAutoState //自动风扇状态
 
 exports.FanInfo = () => {
     const info = {
@@ -30,12 +30,12 @@ exports.FanOff = () => {
     rpio.pwmSetData(pwm_pin, 0); // 设置 data/1204 占空比的PWM波
 }
 
-exports.FanON = () => {
-    this.SetFan(100)
+exports.FanON = async () => {
+    this.SetFan((await Cpu.find())[0].fanNum)
 }
 exports.switchFan = async (e) => {
     FanAutoState = false
-  e==undefined ? e=(await Cpu.find())[0].FanState : ''
+    e == undefined ? e = (await Cpu.find())[0].FanState : ''
     if (e) {
         this.FanON()
     } else {
@@ -77,3 +77,4 @@ exports.autoFan = (e) => {
         }
     }, 2000);
 }
+this.autoFan()
