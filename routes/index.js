@@ -26,15 +26,15 @@ router.get('/SetFan', async (ctx, next) => {
 router.get('/SetAutoFan', async (ctx, next) => {
   let infos = (await Cpu.find())[0]
   let _id={_id:infos._id.toString() }
-  infos = {  FanAutoState: ctx.query.state,info:{a:12} }
+  infos = {  FanAutoState: ctx.query.state }
   Cpu.updateOne(_id,infos,()=>{})
   ctx.body =  cpu.autoFan(ctx.query.state)
   ctx.status = 200  
 })
 router.get('/FanInfo', async (ctx, next) => {
-  let infos = await Cpu.find()
-  PublicNum = infos[0].fanNum
-  ctx.body = { ...cpu.FanInfo(), PublicNum }
+  let infos = (await Cpu.find())[0]
+
+  ctx.body = { ...cpu.FanInfo(), infos }
   ctx.status = 200
 })
 module.exports = router
