@@ -33,14 +33,13 @@ exports.getCpuTem = () => {
 }
 exports.FanOff = () => {
     rpio.pwmSetData(pwm_pin, 0); // 设置 data/1204 占空比的PWM波
-    FanAutoState = false
 }
 
 exports.FanON = () => {
    this.SetFan(100)
-    FanAutoState = false
 }
 let switchFan=async ()=>{
+    FanAutoState=false
   if((await Cpu.find())[0].FanState) {
     this.FanON()
   } else{
@@ -65,7 +64,7 @@ exports.autoFan = (e) => {
             return
         }
         if (this.getCpuTem() < 42) {
-            this.FanOff(10)
+            this.FanOff(0)
             return
         }
         if (this.getCpuTem() < 50) {
