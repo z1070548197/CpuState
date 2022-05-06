@@ -1,4 +1,4 @@
-module.exports = CON = {
+module.exports = {
     Max: 4096,//频率最高值
     Min: 3300,//频率最低值
     pwm_pin: 12,// 排针第12引脚
