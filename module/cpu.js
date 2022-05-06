@@ -21,13 +21,12 @@ exports.FanOff = () => {
 }
 
 exports.FanON = () => {
-    rpio.pwmSetData(pwm_pin, 4000);
+   this.SetFan(100)
     FanAutoState = false
 }
 exports.SetFan = (num) => {
     num = parseInt(((Max - Min) / 100 * num + Min - 100))
     rpio.pwmSetData(pwm_pin, num);
-    FanAutoState = false
 }
 exports.autoFan = () => {
     FanAutoState = true;
