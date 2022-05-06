@@ -46,7 +46,7 @@ exports.SetFan = (num) => {
     rpio.pwmSetData(pwm_pin, num);
 }
 exports.autoFan = (e) => {
-    FanAutoState = true;
+    FanAutoState = e;
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
         if (FanAutoState === false) { 
