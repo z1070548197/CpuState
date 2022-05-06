@@ -40,21 +40,26 @@ exports.FanON = () => {
    this.SetFan(100)
     FanAutoState = false
 }
+let switchFan=async ()=>{
+  if((await Cpu.find())[0].FanState) {
+    this.FanON()
+  } else{
+    this.FanOff()
+  }
+}
 exports.SetFan = (num) => {
     PublicNum=num
     num = parseInt(((Max - Min) / 100 * num + Min - 100))
     rpio.pwmSetData(pwm_pin, num);
 }
-let switchFan=(e)=>{
 
-}
 exports.autoFan = (e) => {
     FanAutoState = e;
-    console.log(e,typeof e)
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
-        if (FanAutoState === false) { 
-
+        if (FanAutoState === 'false' ||FanAutoState == false) { 
+            console.log('打开手动')
+            switchFan()
             clearInterval(autoInterval)//自动模式被关闭自动清理定时器
             return
         }
