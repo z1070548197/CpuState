@@ -21,15 +21,15 @@ router.get('/FanOn', async (ctx, next) => {
 router.get('/SetFan', async (ctx, next) => {
   let num = ctx.query.num
   ctx.body = cpu.SetFan(num)
-  ctx.status = 200
+  ctx.status = 200 
 })
 router.get('/SetAutoFan', async (ctx, next) => {
   let infos = (await Cpu.find())[0]
-  infos = { ...infos._doc, FanAutoState: ctx.query.state,info:{a:12} }
-  console.log(infos)
-  Cpu.updateOne(infos)
-  ctx.body = cpu.autoFan(ctx.query.state)
-  ctx.status = 200
+  let _id={_id:infos._id.toString() }
+  infos = {  FanAutoState: ctx.query.state,info:{a:12} }
+  Cpu.updateOne(_id,infos,()=>{})
+  ctx.body =  cpu.autoFan(ctx.query.state)
+  ctx.status = 200  
 })
 router.get('/FanInfo', async (ctx, next) => {
   let infos = await Cpu.find()

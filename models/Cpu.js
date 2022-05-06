@@ -8,10 +8,12 @@ const UserSchema = new Schema({
     default:50
   },
   info:{
-    type:Object
+    type:Object,
+    default:{}
   },
   FanAutoState:{
-    type:Boolean
+    type:Boolean,
+    default:true
   }
 });
  
