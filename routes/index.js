@@ -15,7 +15,16 @@ router.get('/FanOff', async (ctx, next) => {
   ctx.status = 200
 })
 router.get('/FanOn', async (ctx, next) => {
-  ctx.body = cpu.FanON()
+  ctx.body = cpu.FanON() 
+  ctx.status = 200
+})
+router.get('/switchFan', async (ctx, next) => {
+  if(ctx.query.state==true){
+    ctx.body = cpu.FanON()
+  }else{
+    ctx.body = cpu.FanOff()
+  }
+  
   ctx.status = 200
 })
 router.get('/SetFan', async (ctx, next) => {
