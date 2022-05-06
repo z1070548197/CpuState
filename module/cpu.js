@@ -28,7 +28,7 @@ exports.SetFan = (num) => {
 exports.autoFan = () => {
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
-      if(this.getCpuTem()<40) {
+      if(this.getCpuTem()<42) {
         this.FanOff(10)
         return
       }
