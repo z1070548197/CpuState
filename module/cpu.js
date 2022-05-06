@@ -8,24 +8,24 @@ let Max = CON.Max; //频率最高值
 let Min = CON.Min;//频率最低值
 let autoInterval = null; //定时器存储
 let pwm_pin = CON.pwm_pin;  // 排针第12引脚
-let PublicNum=50 //默认风扇转数 100为慢速
+let PublicNum = 50 //默认风扇转数 100为慢速
 rpio.open(pwm_pin, rpio.PWM); // 设置为PWM输出
 rpio.pwmSetClockDivider(8); // 时钟8分频 具体是多少 可能示波器显示的会比较准确，目前没发现有文档说明
 rpio.pwmSetRange(pwm_pin, Max); // 设置PWM发生器范围
 // rpio.msleep(6); // 延时6毫秒
 const TEMP_FILE = CON.TEMP_FILE //cpu温度路径
 let FanAutoState = false  //自动风扇状态
-let Stateinfo=async ()=>{
-    if((await Cpu.find()).length===0){
+let Stateinfo = async () => {
+    if ((await Cpu.find()).length === 0) {
         new Cpu().save()
     }
 }
 Stateinfo()
 exports.FanInfo = () => {
-    const info={
-        CON,FanAutoState
+    const info = {
+        CON, FanAutoState
     }
-   return info
+    return info
 }
 exports.getCpuTem = () => {
     let tem = parseInt(fs.readFileSync(TEMP_FILE)) / 1000
@@ -36,18 +36,18 @@ exports.FanOff = () => {
 }
 
 exports.FanON = () => {
-   this.SetFan(100)
+    this.SetFan(100)
 }
-let switchFan=async ()=>{
-    FanAutoState=false
-  if((await Cpu.find())[0].FanState) {
-    this.FanON()
-  } else{
-    this.FanOff()
-  }
+let switchFan = async (e) => {
+    FanAutoState = false
+    if (e) {
+        this.FanON()
+    } else {
+        this.FanOff()
+    }
 }
 exports.SetFan = (num) => {
-    PublicNum=num
+    PublicNum = num
     num = parseInt(((Max - Min) / 100 * num + Min - 100))
     rpio.pwmSetData(pwm_pin, num);
 }
@@ -57,7 +57,7 @@ exports.autoFan = (e) => {
     clearInterval(autoInterval)
     autoInterval = setInterval(() => {
         console.log(FanAutoState)
-        if (FanAutoState === 'false' || FanAutoState == false) { 
+        if (FanAutoState === 'false' || FanAutoState == false) {
             console.log('打开手动')
             switchFan()
             clearInterval(autoInterval)//自动模式被关闭自动清理定时器

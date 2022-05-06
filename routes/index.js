@@ -33,9 +33,9 @@ router.get('/switchFan', async (ctx, next) => {
   Set_AUTOSTATE(false)
   Set_FanSTATE(ctx.query.state)
   if (ctx.query.state == 'true') {
-    ctx.body = cpu.FanON()
+    ctx.body = cpu.switchFan(true)
   } else {
-    ctx.body = cpu.FanOff()
+    ctx.body = cpu.switchFan(false)
   }
   ctx.status = 200
 })
