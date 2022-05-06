@@ -4,10 +4,16 @@ const cpu = require('../module/cpu')
 router.get('/', async (ctx, next) => {
 
 })
-let Set_AUTOSTATE =async (e) => {
+let Set_AUTOSTATE = async (e) => {
   let infos = (await Cpu.find())[0]
   let _id = { _id: infos._id.toString() }
   infos = { FanAutoState: e }
+  Cpu.updateOne(_id, infos, () => { })
+}
+let Set_FanSTATE = async (e) => {
+  let infos = (await Cpu.find())[0]
+  let _id = { _id: infos._id.toString() }
+  infos = { FanState: e }
   Cpu.updateOne(_id, infos, () => { })
 }
 router.get('/getCpuTem', async (ctx, next) => {
@@ -25,11 +31,11 @@ router.get('/FanOn', async (ctx, next) => {
 })
 router.get('/switchFan', async (ctx, next) => {
   Set_AUTOSTATE(false)
+  Set_FanSTATE(ctx.query.state)
   if (ctx.query.state == 'true') {
     ctx.body = cpu.FanON()
   } else {
     ctx.body = cpu.FanOff()
-    console.log('312')
   }
   ctx.status = 200
 })

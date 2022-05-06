@@ -14,6 +14,9 @@ const UserSchema = new Schema({
   FanAutoState:{
     type:Boolean,
     default:true
+  },
+  FanState:{
+    type:Boolean,
   }
 });
  
