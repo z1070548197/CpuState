@@ -6,10 +6,6 @@ let Stateinfo = async () => {
       new Cpu().save()
   }
 }
-Stateinfo()
-router.get('/', async (ctx, next) => {
-
-})
 let Set_AUTOSTATE = async (e) => {
   let infos = (await Cpu.find())[0]
   let _id = { _id: infos._id.toString() }
@@ -22,6 +18,11 @@ let Set_FanSTATE = async (e) => {
   infos = { FanState: e }
   Cpu.updateOne(_id, infos, () => { })
 }
+Stateinfo()
+router.get('/', async (ctx, next) => {
+
+})
+
 router.get('/getCpuTem', async (ctx, next) => {
   ctx.body = cpu.getCpuTem()
   ctx.status = 200
@@ -50,8 +51,6 @@ router.get('/SetFan', async (ctx, next) => {
   let _id = { _id: infos._id.toString() }
   infos = { fanNum: ctx.query.num }
   Cpu.updateOne(_id, infos, () => { })
-    
-    
   let num = ctx.query.num
   ctx.body = cpu.SetFan(num)
   ctx.status = 200
@@ -64,7 +63,6 @@ router.get('/SetAutoFan', async (ctx, next) => {
 
 router.get('/FanInfo', async (ctx, next) => {
   let infos = (await Cpu.find())[0]._doc
-
   ctx.body = { ...cpu.FanInfo(), ...infos }
   ctx.status = 200
 })
