@@ -1,16 +1,21 @@
-var child_process = require('child_process');
-var spawn = child_process.spawn;
+let day = 1
+let dayMoney = []
 
-var wmic = spawn('ls', ['-a']);
-
-wmic.stdout.on('data', function(data) {
-     console.log('使用spawn方法输出: ' + data);
- });
-
-wmic.stderr.on('data', function(data) {
-     console.log('stderr: ' + data);
-});
-
-wmic.on('close', function(code) {
-     console.log('child process exited with code ' + code);
-});
+for (let money = 1; true; day++) {
+     let addMoney = 0
+     if (day === 1) {
+          dayMoney[day] = money
+          console.log(`第${day}天赚${money}`)
+          continue
+     }
+     money = money * 2
+     dayMoney[day] = money
+     for (let v in dayMoney) {
+          addMoney = addMoney + dayMoney[v]
+     }
+     console.log(`第${day}天赚${addMoney}`)
+     if (addMoney >= 500) {
+          break
+     }
+}
+//1+2+4+8
