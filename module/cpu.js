@@ -9,7 +9,7 @@ let Max = CON.Max; //频率最高值
 let Min = CON.Min;//频率最低值
 let autoInterval = null; //定时器存储
 let pwm_pin = CON.pwm_pin;  // 排针第12引脚
-let PublicNum = 50 //默认风扇转数 100为慢速
+let PublicNum = 100 //默认风扇转数 100为慢速
 rpio.open(pwm_pin, rpio.PWM); // 设置为PWM输出
 rpio.pwmSetClockDivider(8); // 时钟8分频 具体是多少 可能示波器显示的会比较准确，目前没发现有文档说明
 rpio.pwmSetRange(pwm_pin, Max); // 设置PWM发生器范围
@@ -45,7 +45,7 @@ exports.switchFan = async (e) => {
 }
 exports.SetFan = (num) => {
     PublicNum = num
-    num = parseInt(((Max - Min) / 100 * num + Min - 100))
+    num = parseInt(((Max - Min) / 100 * num + Min -50))
     rpio.pwmSetData(pwm_pin, num);
 }
 
@@ -60,7 +60,7 @@ exports.autoFan = (e) => {
             clearInterval(autoInterval)//自动模式被关闭自动清理定时器
             return
         }
-        if (this.getCpuTem() < 42) {
+        if (this.getCpuTem() < 50) {
             this.FanOff(0)
             return
         }
@@ -68,12 +68,12 @@ exports.autoFan = (e) => {
             this.SetFan(40)
             return
         }
-        if (this.getCpuTem() < 50) {
-            this.SetFan(50)
+        if (this.getCpuTem() < 65) {
+            this.SetFan(55)
             return
         }
-        if (this.getCpuTem() < 60) {
-            this.SetFan(70)
+        if (this.getCpuTem() < 100) {
+            this.SetFan(100)
             return
         }
     }, 2000);

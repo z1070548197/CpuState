@@ -46,6 +46,12 @@ router.get('/switchFan', async (ctx, next) => {
   ctx.status = 200
 })
 router.get('/SetFan', async (ctx, next) => {
+      let infos = (await Cpu.find())[0]
+  let _id = { _id: infos._id.toString() }
+  infos = { fanNum: ctx.query.num }
+  Cpu.updateOne(_id, infos, () => { })
+    
+    
   let num = ctx.query.num
   ctx.body = cpu.SetFan(num)
   ctx.status = 200
